@@ -5,12 +5,15 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js'; // .js extension needed when bringing in javascript files using es6 modules syntax
 
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 
 connectDB();
 
 const app = express();
+
+app.use(express.json());
 
 // Middleware is a function that has access to the request, response cycle
 
@@ -25,6 +28,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 app.use(notFound);
 
